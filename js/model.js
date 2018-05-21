@@ -5,7 +5,7 @@ export default class Model extends EventEmitter {
         super();
 
         this.firstname = firstname;
-        this.lastname = lastname;       
+        this.lastname = lastname; 
     }
 
     init() {
