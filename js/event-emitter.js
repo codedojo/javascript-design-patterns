@@ -9,8 +9,10 @@ export default class EventEmitter {
     }
 
     emit(event, data) {
-        for (let callback of this.events[event]) {
-            callback(data);
+        if (Array.isArray(this.events[event])) {
+            for (let callback of this.events[event]) {
+                callback(data);
+            }
         }
     }
 }

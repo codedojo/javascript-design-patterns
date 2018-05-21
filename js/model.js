@@ -8,10 +8,6 @@ export default class Model extends EventEmitter {
         this.lastname = lastname; 
     }
 
-    init() {
-        this.emit('init', this.data);
-    }
-
     get data() {
         return { firstname: this.firstname, lastname: this.lastname };
     }

@@ -1,6 +1,6 @@
 export default class View {
-    constructor(presenter) {
-        this.presenter = presenter;
+    constructor(vm) {
+        this.vm = vm;
 
         this.init();
     }
@@ -13,9 +13,12 @@ export default class View {
         this.saveButton = document.getElementById('save');
         this.resetButton = document.getElementById('reset');
         
-        this.outputElement.value = this.presenter.viewModel.fullname;
-        this.firstNameInput.value = this.presenter.viewModel.firstname;
-        this.lastNameInput.value = this.presenter.viewModel.lastname;
+        this.outputElement.value = this.vm.fullname;
+        this.firstNameInput.value = this.vm.firstname;
+        this.lastNameInput.value = this.vm.lastname;
+
+        this.firstNameInput.addEventListener('input', event => this.vm.firstname = this.firstNameInput.value);
+        this.lastNameInput.addEventListener('input', event => this.vm.lastname = this.lastNameInput.value);
 
         this.saveButton.addEventListener('click', this.handleSaveButtonClick.bind(this));
         this.resetButton.addEventListener('click', this.handleResetButtonClick.bind(this));
@@ -38,14 +41,14 @@ export default class View {
     }
 
     handleSaveButtonClick() {
-        this.presenter.save({
-            firstname: this.firstNameInput.value,
-            lastname: this.lastNameInput.value
+        this.vm.save(message => {
+            this.message = message;
+            this.reset();
         });
     }
 
     handleResetButtonClick() {
-        this.presenter.reset();
+        this.vm.reset(() => this.reset());
     }
 
     reset() {

@@ -1,8 +1,7 @@
 import Model from './model.js';
 import View from './view.js';
-import Presenter from './presenter.js';
+import ViewModel from './view-model.js';
 
 const model = new Model();
-const presenter = new Presenter(model);
-const view = new View(presenter);
-presenter.init(view);
+const viewModel = new ViewModel(model);
+const view = new View(viewModel);
